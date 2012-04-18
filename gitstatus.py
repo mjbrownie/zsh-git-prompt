@@ -20,8 +20,8 @@ if error_string.find('fatal: Not a git repository') != -1:
 branch = branch.strip()[11:]
 
 
-changed_files = [namestat[0] for namestat in Popen(['git','diff','--name-status'], stdout=PIPE).communicate()[0].splitlines()]
-staged_files = [namestat[0] for namestat in Popen(['git','diff', '--staged','--name-status'], stdout=PIPE).communicate()[0].splitlines()]
+changed_files = [namestat[0] for namestat in Popen(['git','diff','--name-status', '--ignore-submodules'], stdout=PIPE).communicate()[0].splitlines()]
+staged_files = [namestat[0] for namestat in Popen(['git','diff', '--staged','--name-status', '--ignore-submodules'], stdout=PIPE).communicate()[0].splitlines()]
 nb_changed = len(changed_files) - changed_files.count('U')
 nb_U = staged_files.count('U')
 nb_staged = len(staged_files) - nb_U
